@@ -1,59 +1,31 @@
 import React from 'react'
 import styled from 'styled-components'
+import Header from './Header'
 import Section from './Section'
+import { useSelector } from 'react-redux'
+import {SelectCars} from '../features/CarSlice'
 
 function Home() {
+
+    const cars = useSelector(SelectCars)
+    // console.log(cars);
+
+    const renderSection = cars.map(({title, discription, image, leftBtnText, rightBtnText}, index)=>{
+        return(
+        <Section
+            key = {index} 
+            title={title}
+            discription = {discription}
+            image = {image}
+            leftBtnText = {leftBtnText}
+            rightBtnText = {rightBtnText}
+        />
+    )})
+
   return (
     <Container>
-        <Section
-            title='Model S'
-            discription='Order Online for Touchless Dilevery'
-            image = 'model-s.jpg'
-            leftBtnText = 'Custom Order'
-            rightBtnText = 'Existing Inventory'
-        />
-        <Section
-            title='Model Y'
-            discription='Order Online for Touchless Dilevery'
-            image = 'model-y.jpg'
-            leftBtnText = 'Custom Order'
-            rightBtnText = 'Existing Inventory'
-        />
-        <Section
-            title='Model 3'
-            discription='Order Online for Touchless Dilevery'
-            image = 'model-3.jpg'
-            leftBtnText = 'Custom Order'
-            rightBtnText = 'Existing Inventory'
-        />
-        <Section
-            title='Model X'
-            discription='Order Online for Touchless Dilevery'
-            image = 'model-x.jpg'
-            leftBtnText = 'Custom Order'
-            rightBtnText = 'Existing Inventory'
-        />
-        <Section
-            title='Lowest Cost Solar Panels in America'
-            discription='Money-back guarantee'
-            image = 'solar-panel.jpg'
-            leftBtnText = 'Order Now'
-            rightBtnText = 'Learn More'
-        />
-        <Section
-            title='Solar for New Roofs'
-            discription='Solar Roof Costs Less Than a New Roof'
-            image = 'solar-roof.jpg'
-            leftBtnText = 'Order Now'
-            rightBtnText = 'Learn More'
-        />
-        <Section
-            title='Accessories'
-            discription=''
-            image = 'accessories.jpg'
-            leftBtnText = 'Shop Now'
-            rightBtnText = ''
-        />
+        <Header/>
+        {renderSection}
     </Container>
   )
 }
